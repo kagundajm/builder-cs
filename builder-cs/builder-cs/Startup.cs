@@ -2,9 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentMigrator.Runner;
+using Identity.Dapper.Postgres;
+using Identity.Dapper.Postgres.Models;
+using Identity.Dapper.Postgres.Stores;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,11 +28,38 @@ namespace BuilderCS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddIdentity<ApplicationUser, ApplicationRole>()
+            //    .AddDefaultTokenProviders();  //.AddDefaultUI();
+            //services.AddTransient<IUserStore<ApplicationUser>, UserStore>();
+            //services.AddTransient<IRoleStore<ApplicationRole>, RoleStore>();
+            //services.AddTransient<IDatabaseConnectionFactory>(
+            //    provider => new PostgresConnectionFactory(
+            //        Configuration.GetConnectionString(AppConnectionString)));
+
+            //services.AddTransient<IDbConnectionFactory>(
+            //    provider => new DbConnectionFactory(
+            //        Configuration.GetConnectionString(AppConnectionString)));
+
+            //services.AddTransient<IAccountService, AccountService>();
+
+
+            //services.AddFluentMigratorCore()
+            //  .ConfigureRunner(
+            //    builder => builder
+            //      // Add PostgreSQL support fot FluentMigrator
+            //      .AddPostgres()
+            //      .WithGlobalConnectionString(AppConnectionString)
+            //      .ScanIn(typeof(Account).Assembly).For.Migrations()
+            //    ).AddLogging(log => log.AddFluentMigratorConsole());
+
             services.AddRazorPages();
+
+            //services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
+                          IMigrationRunner migrationRunner)
         {
             if (env.IsDevelopment())
             {
@@ -51,6 +83,8 @@ namespace BuilderCS
             {
                 endpoints.MapRazorPages();
             });
+
+            //migrationRunner.MigrateUp();
         }
     }
 }

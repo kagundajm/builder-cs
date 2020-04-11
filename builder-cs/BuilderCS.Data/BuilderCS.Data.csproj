@@ -9,5 +9,10 @@
     <PackageReference Include="FluentMigrator" Version="3.2.1" />
     <PackageReference Include="Npgsql" Version="4.1.3.1" />
     <PackageReference Include="Dapper" Version="2.0.35" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="FluentMigrator.Runner" Version="3.2.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BuilderCS.Core\BuilderCS.Core.csproj" />
   </ItemGroup>
 </Project>
